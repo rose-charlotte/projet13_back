@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const bankAccountSchema = new mongoose.Schema(
     {
-        email: String,
-        password: String,
-        firstName: String,
-        lastName: String,
+        type: String,
+        accountId: String,
+        currency: String,
+        userId: String,
+        balanceType: String,
     },
     {
         timestamps: true,
@@ -13,12 +14,10 @@ const userSchema = new mongoose.Schema(
             transform: (doc, ret, options) => {
                 ret.id = ret._id;
                 delete ret._id;
-                delete ret.password;
-                delete ret.__v;
                 return ret;
             },
         },
     }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("BankAccount", bankAccountSchema);
